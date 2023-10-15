@@ -21,9 +21,8 @@ function App() {
 
   const hadleSubmit = async (e) => {
     e.preventDefault();
-
+    setDisabled(true)
     setTimeout(async() => {
-      setDisabled(true)
       let res = await preparedData()
       setUsers(res)
       setDisabled(false)
