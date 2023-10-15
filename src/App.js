@@ -13,6 +13,11 @@ function App() {
     return result
   }
 
+  const onNumberChange = (e) => {
+    const result = e.target.value.replace(/(\d{2})(\d{2})(\d{2})/g, "$1-$2-$3");
+    setNumber(result)
+  }
+
   const hadleSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,7 +38,7 @@ function App() {
           </div>
           <div className='app__input'>
             <label> Password </label>
-            <input type="text" name='number' value={number} onChange={(e) => setNumber(e.target.value)} className="app__password__input" />
+            <input type="text" name='number' value={number} onChange={onNumberChange} className="app__password__input" />
           </div>
         </div>
         <button type="submit" className="app__btn"> Submit </button>
