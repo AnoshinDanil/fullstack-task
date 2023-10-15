@@ -7,9 +7,10 @@ function App() {
   const [email, setEmail] = useState('')
   const [number, setNumber] = useState('')
   const [users, setUsers] = useState([])
+  const [disabled, setDisabled] = useState(false)
 
   const preparedData = async() => {
-    const result = await fetchGet('users/FindUser', {email, number})
+    const result = await fetchGet('users/FindUser', {email, number: number.replace(/-/gi, "")})
     return result
   }
 
@@ -22,8 +23,10 @@ function App() {
     e.preventDefault();
 
     setTimeout(async() => {
+      setDisabled(true)
       let res = await preparedData()
       setUsers(res)
+      setDisabled(false)
     }, 5000)
     
   }
@@ -41,7 +44,7 @@ function App() {
             <input type="text" name='number' value={number} onChange={onNumberChange} className="app__password__input" />
           </div>
         </div>
-        <button type="submit" className="app__btn"> Submit </button>
+        <button disabled={disabled} type="submit" className="app__btn"> Submit </button>
       </form>
       { users[0] && 
       <div className='app__result'>
